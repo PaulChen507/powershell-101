@@ -1,10 +1,10 @@
-
+#region Documentación
 <# Documentar tus scripts en PowerShell es una buena práctica fundamental para que otros puedan entender, 
 mantener y reutilizar el código en el futuro. Aquí te explico cómo hacerlo correctamente:#>
 
-#1. Comentarios de una sola línea: Usa el símbolo `#` para agregar comentarios de una sola línea.
+#1. Comentarios de una sola línea: Usa el símbolo # para agregar comentarios de una sola línea.
 #2. Comentarios de varias líneas: Usa <# y #> para agregar comentarios de varias líneas.      
-#3. Comentarios de documentación: Usa `"""` para agregar comentarios de documentación que describan
+#3. Comentarios de documentación: Usa """ para agregar comentarios de documentación que describan
 #el propósito del script, los parámetros y el uso general. Esto es especialmente útil para scripts más largos o complejos.
 #4. Usa nombres descriptivos para variables y funciones: Asegúrate de que los nombres de tus variables y funciones sean claros y descriptivos.
 #5. Mantén un estilo de codificación consistente: Usa un estilo de codificación coherente en todo tu script para que sea más fácil de leer y entender.
@@ -13,8 +13,9 @@ mantener y reutilizar el código en el futuro. Aquí te explico cómo hacerlo co
 #8. Usa ejemplos: Proporciona ejemplos de uso en los comentarios para que otros puedan entender cómo usar tu script.
 #9. Usa el formato de salida adecuado: Asegúrate de que la salida de tu script sea fácil de leer y entender.
 #>
+#endregion
 
-# Conceptos Básicos de PowerShell
+#region Conceptos Básicos de PowerShell
 
 <#  Modulos
     ¿Qué es un Módulo en PowerShell?
@@ -81,14 +82,22 @@ system_profiler SPSoftwareDataType
 
 # 4. Probar la conectividad de red
 Test-Connection -ComputerName apple.com
+#endregion
 
+#region Variables
+# En PowerShell, puedes almacenar datos en variables, arrays, hashtables y tablas.
+# Estos son algunos de los tipos de datos más comunes que puedes usar en PowerShell.
 
 <#  Variables
-    Las variables en PowerShell se definen con el símbolo `$` seguido del nombre de la variable.
+    Las variables en PowerShell se definen con el símbolo $ seguido del nombre de la variable.
     Puedes almacenar diferentes tipos de datos en variables, como cadenas de texto, números, listas, tablas hash, etc.
 #>
 
+Clear-Host
+Write-Host "Variables" -ForegroundColor Green
+
 # Ejemplo:
+# Definimos una variable
 $miVariable = "Hola, PowerShell!"
 Write-Host $miVariable -ForegroundColor Yellow
 
@@ -100,29 +109,33 @@ $mensaje = "Hola, mi nombre es $nombre y tengo $edad años."
 
 # Puedes mostrar el mensaje en la consola
 Write-Host $mensaje
-# También puedes usar variables para almacenar objetos, como listas o tablas.
-# Ejemplo de uso de una lista
 
+#region Arrays
 <#  Arrays 
     Un array es una colección ordenada de elementos indexados numéricamente. 
     Los elementos se acceden por su posición (empezando en 0)
 #>
 
 # Ejemplo de uso de un array
+Write-Host "Arrays" -ForegroundColor Green
 $miLista = @("Elemento1", "Elemento2", "Elemento3")
-
+Write-Host "Lista: $miLista" -ForegroundColor Yellow
 # Puedes recorrer la lista y mostrar cada elemento
 foreach ($elemento in $miLista) {
-    Write-Host $elemento
+    Write-Host $elemento -ForegroundColor Cyan
 }
+#TODO: Expandir el ejemplo de uso de un array
+#endregion
 
+#region HashTable
 <#  Hashtable
     Un hashtable es una colección desordenada de pares clave-valor. 
     Se accede a los elementos por nombre de clave, no por posición.
     Un hashtable es una colección clave-valor, como un diccionario. Cada clave apunta a un solo valor.
     https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-hashtable
 #>
-
+Clear-Host
+Write-Host "Hashtable" -ForegroundColor Green
 # Ejemplo de uso de una tabla hash
 $miHashtable = @{
     "Nombre" = "Juan"
@@ -136,15 +149,26 @@ Write-Host "Edad: $($miHashtable["Edad"])"
 Write-Host "Ciudad: $($miHashtable["Ciudad"])"
 
 # Puedes agregar nuevos pares clave-valor a la tabla hash
+Write-Host "Agregando nuevo par clave-valor a la tabla hash..." -ForegroundColor Green
 $miHashtable["País"] = "Panamá"
+Write-Host "País: $($miHashtable["País"])" -ForegroundColor Yellow
 
 # Puedes modificar un valor existente
+Write-Host "Modificando el valor de la clave 'Edad'..." -ForegroundColor Green
 $miHashtable["Edad"] = 31
+Write-Host "Edad modificada: $($miHashtable["Edad"])" -ForegroundColor Yellow
 
 # Puedes eliminar un par clave-valor de la tabla hash
+Write-Host "Eliminando el par clave-valor 'Nombre'..." -ForegroundColor Green
 $miHashtable.Remove("Nombre")
+Write-Host "Nombre eliminado: $($miHashtable["Nombre"])" -ForegroundColor Yellow
 
 # Puedes verificar si una clave existe en la tabla hash
+# "¿La clave 'Ciudad' existe?" -ForegroundColor Green
+# Verifica si la clave "Ciudad" existe en la tabla hash
+# Si la clave existe, muestra un mensaje
+# Si la clave no existe, muestra otro mensaje
+Write-Host "¿La clave 'Nombre' existe? $($miHashtable.ContainsKey("Nombre"))"ç
 if ($miHashtable.ContainsKey("Ciudad")) {
     Write-Host "La clave 'Ciudad' existe en la tabla hash."
 }
@@ -153,15 +177,19 @@ else {
 }
 
 # Puedes recorrer la tabla hash y mostrar cada clave y valor
+Write-Host "Recorriendo la tabla hash..." -ForegroundColor Green
 foreach ($clave in $miHashtable.Keys) {
-    Write-Host "$clave $($miHashtable[$clave])"
+    Write-Host "$clave $($miHashtable[$clave])" -ForegroundColor Cyan
 }
 
 # Puedes usar el método GetEnumerator() para recorrer la tabla hash
+Write-Host "Recorriendo la tabla hash con GetEnumerator()..." -ForegroundColor Green
 foreach ($par in $miHashtable.GetEnumerator()) {
-    Write-Host "$($par.Key): $($par.Value)"
+    Write-Host "$($par.Key): $($par.Value)" -ForegroundColor Yellow
 }
+#region
 
+#region Tablas
 <#  Tablas
     Una tabla es una colección ordenada de elementos indexados por un número entero.
     Puedes acceder a los elementos por su posición (empezando en 0).
@@ -170,8 +198,10 @@ foreach ($par in $miHashtable.GetEnumerator()) {
     Una tabla es una colección de filas y columnas, similar a una hoja de cálculo.
     Puedes usar una tabla para almacenar datos estructurados.
 #> 
+Clear-Host
+Write-Host "Tablas" -ForegroundColor Green
 
-# Ejemplo de uso de una tabla
+# Ejemplo  de uso de una tabla
 $miTabla = @(
     @{ Nombre = "Juan"; Edad = 30 },
     @{ Nombre = "María"; Edad = 25 },
@@ -180,19 +210,65 @@ $miTabla = @(
 
 # Puedes recorrer la tabla y mostrar cada fila
 foreach ($fila in $miTabla) {
-    Write-Host "Nombre: $($fila.Nombre), Edad: $($fila.Edad)"
+    Write-Host "Nombre: $($fila.Nombre), Edad: $($fila.Edad)" -ForegroundColor Yellow
 }
 
+# Puedes acceder a los valores de la tabla usando el índice de la fila y el nombre de la columna
+Write-Host
+Write-Host "Nombre: $($miTabla[0].Nombre), Edad: $($miTabla[0].Edad)" -ForegroundColor Yellow
+Write-Host "Nombre: $($miTabla[1].Nombre), Edad: $($miTabla[1].Edad)" -ForegroundColor Yellow
+Write-Host "Nombre: $($miTabla[2].Nombre), Edad: $($miTabla[2].Edad)" -ForegroundColor Yellow
+
+# Puedes agregar nuevas filas a la tabla
+Write-Host "Agregando nueva fila a la tabla..." -ForegroundColor Green
+$miTabla += @{ Nombre = "Ana"; Edad = 28 }
+foreach ($fila in $miTabla) {
+    Write-Host "Nombre: $($fila.Nombre), Edad: $($fila.Edad)" -ForegroundColor Yellow
+}
+
+# Puedes modificar un valor existente
+Write-Host "Modificando el valor de la fila 0..." -ForegroundColor Green
+$miTabla[0].Edad = 31
+foreach ($fila in $miTabla) {
+    Write-Host "Nombre: $($fila.Nombre), Edad: $($fila.Edad)" -ForegroundColor Yellow
+}
+
+# Puedes eliminar una fila de la tabla
+Write-Host "Eliminando la fila con el nombre 'Pedro'..." -ForegroundColor Green
+$miTabla = $miTabla | Where-Object { $_.Nombre -ne "Pedro" }
+foreach ($fila in $miTabla) {
+    Write-Host "Nombre: $($fila.Nombre), Edad: $($fila.Edad)" -ForegroundColor Yellow
+}
+
+# Puedes verificar si una fila existe en la tabla
+# Verifica si la fila con el nombre "Juan" existe en la tabla
+Write-Host "¿La fila con el nombre 'Juan' existe?" -ForegroundColor Green
+$existeFila = $miTabla | Where-Object { $_.Nombre -eq "Juan" }
+if ($existeFila) {
+    Write-Host "La fila con el nombre 'Juan' existe en la tabla."
+}
+else {
+    Write-Host "La fila con el nombre 'Juan' no existe en la tabla."
+}
+
+# Puedes usar el método Select-Object para seleccionar columnas específicas de la tabla
+$miTabla | Select-Object Nombre, Edad
+#endregion
+
+#region PSCustomObjects
 <#  PSCutomObjects
     Un PSCustomObject es un objeto personalizado que puedes crear en PowerShell.
     Puedes usar PSCustomObject para crear objetos con propiedades personalizadas.
     Muy útil para almacenar datos estructurados y para crear objetos que se pueden usar en scripts y funciones.
-    Mi objeto favorito para almacenar datos estructurados y utilizaros en las salidas de mis scripts.
+    Mi objeto favorito para almacenar datos estructurados y utilizarlos en las salidas de mis scripts.
 
     https://learn.microsoft.com/en-us/powershell/scripting/learn/deep-dives/everything-about-pscustomobject?view=powershell-7.5
     https://learn.microsoft.com/en-us/powershell/module/microsoft.powershell.core/about/about_pscustomobject?view=powershell-7.5
 
 #>
+Clear-Host
+Write-Host "PSCustomObject" -ForegroundColor Green
+
 # Ejemplo de uso de PSCustomObject
 $miObjeto = [PSCustomObject]@{
     Nombre = "Juan"
@@ -200,27 +276,36 @@ $miObjeto = [PSCustomObject]@{
     Ciudad = "Panamá"
 }
 # Puedes acceder a las propiedades del objeto usando el operador punto
-Write-Host "Nombre: $($miObjeto.Nombre)"
-Write-Host "Edad: $($miObjeto.Edad)"
-Write-Host "Ciudad: $($miObjeto.Ciudad)"
+Write-Host "Accediendo a las propiedades del objeto..." -ForegroundColor Green
+Write-Host "Nombre: $($miObjeto.Nombre)" -ForegroundColor Yellow
+Write-Host "Edad: $($miObjeto.Edad)" -ForegroundColor Yellow
+Write-Host "Ciudad: $($miObjeto.Ciudad)" -ForegroundColor Yellow
 
 # Puedes agregar nuevas propiedades al objeto
-$miObjeto.País = "Panamá"
+Write-Host "Agregando nueva propiedad al objeto..." -ForegroundColor Green
+$miObjeto | Add-Member -MemberType NoteProperty -Name Pais -Value "Panamá"
+Write-Host "Pais: $($miObjeto.Pais)" -ForegroundColor Yellow
 
 # Puedes modificar una propiedad existente
+Write-Host "Modificando la propiedad 'Edad'..." -ForegroundColor Green
 $miObjeto.Edad = 31
+Write-Host "Edad modificada: $($miObjeto.Edad)" -ForegroundColor Yellow
 
 # Puedes eliminar una propiedad del objeto
+Write-Host "Eliminando la propiedad 'Ciudad'..." -ForegroundColor Green
 $miObjeto.PSObject.Properties.Remove("Ciudad")
+Write-Host "Ciudad: $($miObjeto.Ciudad)" -ForegroundColor Yellow
 
 # Puedes recorrer las propiedades del objeto y mostrar cada nombre y valor
+Write-Host "Recorriendo las propiedades del objeto..." -ForegroundColor Green
 foreach ($propiedad in $miObjeto.PSObject.Properties) {
-    Write-Host "$($propiedad.Name): $($propiedad.Value)"
+    Write-Host "$($propiedad.Name): $($propiedad.Value)" -ForegroundColor Cyan
 }
 
 # Puedes usar el método GetEnumerator() para recorrer las propiedades del objeto
+Write-Host "Recorriendo las propiedades del objeto con GetEnumerator()..." -ForegroundColor Green
 foreach ($par in $miObjeto.PSObject.Properties.GetEnumerator()) {
-    Write-Host "$($par.Name): $($par.Value)"
+    Write-Host "$($par.Name): $($par.Value)" -ForegroundColor Yellow
 }
 
 # Puedes usar el método Select-Object para seleccionar propiedades específicas del objeto
@@ -238,6 +323,8 @@ $miObjeto | ConvertTo-Json
 # Puedes usar el método ConvertFrom-Json para convertir un JSON a un objeto
 $json = '{"Nombre":"Juan","Edad":30,"Ciudad":"Panamá"}'
 $miObjetoDesdeJson = $json | ConvertFrom-Json
+Write-Host "Objeto convertido desde JSON: " -ForegroundColor Yellow
+$miObjetoDesdeJson | format-table -AutoSize
 
 # Puedes acceder a las propiedades del objeto convertido desde JSON
 Write-Host "Nombre: $($miObjetoDesdeJson.Nombre)"
@@ -248,7 +335,29 @@ $miObjeto | Get-Member
 
 # Puedes usar el método Get-Member para obtener información sobre las propiedades y métodos del objeto
 $miObjetoDesdeJson | Get-Member
+#endregion
 
+#region Tipos de Datos
+# En PowerShell, puedes trabajar con diferentes tipos de datos, como cadenas de texto, números, booleanos, arreglos, tablas hash y objetos personalizados.
+# Estos son algunos de los tipos de datos más comunes que puedes usar en PowerShell.
+
+# 1. Cadenas de texto (string)
+$miCadena = "Hola, PowerShell!"
+Write-Host $miCadena
+
+# 2. Números (int, float, decimal)
+$miNumeroEntero = 42
+$miNumeroDecimal = 3.14
+$miNumeroFlotante = 2.71828
+Write-Host "Número entero: $miNumeroEntero"
+Write-Host "Número decimal: $miNumeroDecimal"
+Write-Host "Número flotante: $miNumeroFlotante"
+
+# 3. Booleanos (bool)
+$miBooleanoVerdadero = $true
+$miBooleanoFalso = $false
+Write-Host "Booleano verdadero: $miBooleanoVerdadero"
+Write-Host "Booleano falso: $miBooleanoFalso"
 
 <#  Type Constraint
     Los type constraints son restricciones que puedes aplicar a los parámetros de una función o script para asegurarte de que solo se acepten ciertos tipos de datos.
@@ -280,7 +389,6 @@ $miHashtable = "texto" # Error: no se puede convertir a [hashtable]
 [datetime]$miFecha = Get-Date # Solo puede contener fechas
 Write-Output $miFecha
 $miFecha = "texto" # Error: no se puede convertir a [datetime]
-
 
 <#  Type Casting
     El Type Casting es el proceso de convertir un valor de un tipo a otro. 
@@ -315,3 +423,264 @@ Write-Host "Fecha como cadena: $fechaString"
 $fechaTexto = "2024-12-01"
 [datetime]$fecha = $fechaTexto  # Convierte el texto en un objeto DateTime
 $fecha # Esto puede dar un error si la cadena no es una fecha válida
+#endregion
+
+#region Operadores
+# En PowerShell, los operadores son símbolos que se utilizan para realizar operaciones en variables y valores.
+# Estos son algunos de los operadores más comunes que puedes usar en PowerShell:
+
+# 1. Operadores aritméticos
+
+Clear-Host
+Write-Host "Operadores aritméticos" -ForegroundColor Green
+# Los operadores aritméticos se utilizan para realizar operaciones matemáticas básicas.
+# Estos son los operadores aritméticos más comunes en PowerShell:
+# Suma (+): suma dos números
+# Resta (-): resta el segundo número al primero
+# Multiplicación (*): multiplica dos números
+# División (/): divide el primer número por el segundo
+# Módulo (%): residuo de la división entre dos números
+# Exponente (^): eleva el primer número a la potencia del segundo
+# Ejemplo de uso de operadores aritméticos
+# Definimos dos números
+$numero1 = 10
+$numero2 = 5
+Write-Host "Número 1: $numero1" -ForegroundColor Yellow
+Write-Host "Número 2: $numero2" -ForegroundColor Yellow
+
+# Realizamos operaciones aritméticas
+# Suma, resta, multiplicación, división, módulo y exponente
+
+$suma = $numero1 + $numero2           # Suma (+): suma dos números
+$resta = $numero1 - $numero2          # Resta (-): resta el segundo número al primero
+$multiplicacion = $numero1 * $numero2 # Multiplicación (*): multiplica dos números
+$division = $numero1 / $numero2       # División (/): divide el primer número por el segundo
+$modulo = $numero1 % $numero2         # Módulo (%): residuo de la división entre dos números
+$exponente = [math]::Pow($numero1, $numero2) # Exponente: eleva el primer número a la potencia del segundo
+
+Write-Host "Suma: $suma"
+Write-Host "Resta: $resta"
+Write-Host "Multiplicación: $multiplicacion"
+Write-Host "División: $division"
+Write-Host "Módulo: $modulo"
+Write-Host "Exponente: $exponente"
+
+# 2. Operadores de comparación
+Clear-Host
+Write-Host "Operadores de comparación" -ForegroundColor Green
+# Los operadores de comparación en PowerShell permiten comparar valores y devuelven un resultado booleano ($true o $false).
+# Aquí tienes una breve explicación de los operadores utilizados:
+# -eq  : Igual a (Equal)           -> Devuelve $true si ambos valores son iguales.
+# -ne  : No igual a (Not Equal)    -> Devuelve $true si los valores son diferentes.
+# -gt  : Mayor que (Greater Than)  -> Devuelve $true si el primer valor es mayor que el segundo.
+# -lt  : Menor que (Less Than)     -> Devuelve $true si el primer valor es menor que el segundo.
+# -ge  : Mayor o igual (Greater or Equal) -> Devuelve $true si el primer valor es mayor o igual al segundo.
+# -le  : Menor o igual (Less or Equal)    -> Devuelve $true si el primer valor es menor o igual al segundo.
+$numero1 = 10
+$numero2 = 5
+Write-Host "Número 1: $numero1" -ForegroundColor Yellow
+Write-Host "Número 2: $numero2" -ForegroundColor Yellow
+# Realizamos comparaciones
+# Igual, diferente, mayor, menor, mayor o igual, menor o igual
+# Comparaciones
+$esIgual = $numero1 -eq $numero2
+$esDiferente = $numero1 -ne $numero2
+$esMayor = $numero1 -gt $numero2
+$esMenor = $numero1 -lt $numero2
+$esMayorOIgual = $numero1 -ge $numero2
+$esMenorOIgual = $numero1 -le $numero2
+Write-Host "Es igual: $esIgual"
+Write-Host "Es diferente: $esDiferente"
+Write-Host "Es mayor: $esMayor"
+Write-Host "Es menor: $esMenor"
+Write-Host "Es mayor o igual: $esMayorOIgual"
+Write-Host "Es menor o igual: $esMenorOIgual"
+
+# 3. Operadores lógicos
+Clear-Host
+Write-Host "Operadores lógicos" -ForegroundColor Green
+# Operador lógico -or en PowerShell
+# El operador -or se utiliza para realizar una operación lógica OR (o disyunción lógica) entre dos valores booleanos. 
+# Devuelve True si al menos uno de los operandos es verdadero.
+
+<# Tabla de verdad del OR:
+| Operando 1    | Operando 2    | Resultado |
+| ------------  | ------------  | --------- |
+| True          | True          | True      |
+| True          | False         | True      |
+| False         | True          | True      |
+| False         | False         | False     |
+#>
+
+# Ejemplo en el código
+# Supón que $verdadero = $true y $falso = $false
+$verdadero = $true
+$falso = $false
+# Si quieres comprobar si al menos uno de ellos es verdadero, puedes usar el operador -or:
+# En este caso, $verdadero es True y $falso es False.
+$o = $verdadero -or $falso
+Write-Host "'$verdadero' -or '$falso' = $o" -ForegroundColor Cyan
+
+# Operador lógico NOT (-not)
+$no = -not $verdadero
+Write-Host "-not $verdadero = $no" -ForegroundColor Magenta
+
+# Ejemplo adicional: combinación de operadores
+$resultado = ($verdadero -or $falso) -and (-not $falso)
+Write-Host "($verdadero -or $falso) -and (-not $falso) = $resultado" -ForegroundColor Green
+
+# 4. Operadores de asignación
+Clear-Host
+Write-Host "Operadores de asignación" -ForegroundColor Yellow
+# Los operadores de asignación se utilizan para asignar valores a variables.
+# Estos son los operadores de asignación más comunes en PowerShell:
+# Asignación simple (=): asigna un valor a una variable
+# Asignación de suma (+=): suma un valor a una variable y asigna el resultado a la misma variable
+# Asignación de resta (-=): resta un valor a una variable y asigna el resultado a la misma variable
+# Asignación de multiplicación (*=): multiplica una variable por un valor y asigna el resultado a la misma variable
+# Asignación de división (/=): divide una variable por un valor y asigna el resultado a la misma variable       
+$numero = 10
+Write-Host "Número inicial: $numero" -ForegroundColor Green
+$numero += 5 # Suma y asigna
+Write-Host "Después de += 5: $numero" -ForegroundColor Cyan
+$numero -= 5 # Resta y asigna
+Write-Host "Después de -= 5: $numero" -ForegroundColor Cyan
+$numero *= 5 # Multiplica y asigna
+Write-Host "Después de *= 5: $numero" -ForegroundColor Cyan
+$numero /= 5 # Divide y asigna
+Write-Host "Después de /= 5: $numero" -ForegroundColor Cyan
+$numero = [math]::Pow($numero, 5) # Exponente y asigna
+Write-Host "Después de exponente (^= 5 simulado): $numero" -ForegroundColor Cyan
+
+# 5. Operadores de cadena
+Clear-Host
+Write-Host "Operadores de cadena" -ForegroundColor Yellow
+# Los operadores de cadena se utilizan para manipular cadenas de texto.
+# Concatenación (+): une dos cadenas
+# Repetición (*): repite una cadena un número específico de veces
+# Ejemplo de uso de operadores de cadena
+$cadena1 = "Hola"
+$cadena2 = "Mundo"
+Write-Host "Cadena 1: $cadena1" -ForegroundColor Yellow
+Write-Host "Cadena 2: $cadena2" -ForegroundColor Yellow
+# Concatenación
+$cadenaConcatenada = $cadena1 + " " + $cadena2
+# Repetición
+$cadenaRepetida = $cadena1 * 3 # Repite la cadena 3 veces
+Write-Host "Cadena concatenada: $cadenaConcatenada" -ForegroundColor Green
+Write-Host "Cadena repetida: $cadenaRepetida" -ForegroundColor Green
+# Puedes usar el operador -replace para reemplazar partes de una cadena
+$cadenaReemplazada = $cadenaConcatenada -replace "Mundo", "PowerShell"
+Write-Host "Cadena reemplazada: $cadenaReemplazada" -ForegroundColor Green
+# Puedes usar el operador -split para dividir una cadena en un array
+$miCadena = "Hola, PowerShell, Mundo"
+$miArray = $miCadena -split ", " # Divide la cadena en un array usando la coma como separador
+Write-Host "Cadena original: $miCadena" -ForegroundColor Yellow
+Write-Host "Array resultante: $miArray" -ForegroundColor Green
+# Puedes usar el operador -join para unir un array en una cadena
+$miCadenaUnida = $miArray -join ", " # Une el array en una cadena usando la coma como separador
+Write-Host "Array unido: $miCadenaUnida" -ForegroundColor Green
+# Puedes usar el operador -like para verificar si una cadena coincide con un patrón
+$miCadena = "Hola, PowerShell"
+$patron = "Hola*"
+$coincide = $miCadena -like $patron # Verifica si la cadena coincide con el patrón
+Write-Host "Cadena: $miCadena" -ForegroundColor Yellow
+Write-Host "Patrón: $patron" -ForegroundColor Yellow
+Write-Host "¿Coincide con el patrón? $coincide" -ForegroundColor Green
+# Puedes usar el operador -match para verificar si una cadena coincide con una expresión regular
+$miCadena = "Hola, PowerShell"
+$expresionRegular = "Hola.*"
+$coincide = $miCadena -match $expresionRegular # Verifica si la cadena coincide con la expresión regular
+Write-Host "Cadena: $miCadena" -ForegroundColor Yellow
+Write-Host "Expresión regular: $expresionRegular" -ForegroundColor Yellow
+Write-Host "¿Coincide con la expresión regular? $coincide" -ForegroundColor Green
+# Puedes usar el operador -contains para verificar si un array contiene un elemento
+$miArray = @("Elemento1", "Elemento2", "Elemento3")
+$elemento = "Elemento2"
+$contieneElemento = $miArray -contains $elemento # Verifica si el array contiene el elemento
+Write-Host "Array: $miArray" -ForegroundColor Yellow
+Write-Host "Elemento: $elemento" -ForegroundColor Yellow
+Write-Host "¿Contiene el elemento? $contieneElemento" -ForegroundColor Green
+# Puedes usar el operador -notcontains para verificar si un array no contiene un elemento
+$miArray = @("Elemento1", "Elemento2", "Elemento3")
+$elemento = "Elemento4"
+$noContieneElemento = $miArray -notcontains $elemento # Verifica si el array no contiene el elemento
+Write-Host "Array: $miArray" -ForegroundColor Yellow
+Write-Host "Elemento: $elemento" -ForegroundColor Yellow
+Write-Host "¿No contiene el elemento? $noContieneElemento" -ForegroundColor Green
+
+# 6. Operadores de tipo
+Clear-Host
+Write-Host "Operadores de tipo" -ForegroundColor Yellow
+# Los operadores de tipo se utilizan para convertir un valor de un tipo a otro.
+# Puedes usar el operador [Tipo] para convertir un valor a un tipo específico.
+# Ejemplo de uso de operadores de tipo  
+$numero = 10
+$numeroString = [string]$numero # Convierte el número a cadena
+$numeroDecimal = [decimal]$numero # Convierte el número a decimal
+$numeroEntero = [int]$numero # Convierte el número a entero
+Write-Host "Número como cadena: $numeroString"
+Write-Host "Número como decimal: $numeroDecimal"
+Write-Host "Número como entero: $numeroEntero"
+
+# 7. Operadores de membresía
+$miArray = @(1, 2, 3, 4, 5)
+$existeElemento = 3 -in $miArray # Verifica si el elemento existe en el array
+$noExisteElemento = 6 -notin $miArray # Verifica si el elemento no existe en el array
+Write-Host "¿El elemento 3 existe en el array? $existeElemento"
+Write-Host "¿El elemento 6 no existe en el array? $noExisteElemento"
+
+# 8. Operadores de rango
+$miRango = 1..10 # Crea un rango de números del 1 al 10
+Write-Host "Rango: $miRango"
+
+# 9. Operadores de comparación de cadenas
+$cadena1 = "Hola"
+$cadena2 = "Mundo"
+$sonIguales = $cadena1 -eq $cadena2 # Verifica si las cadenas son iguales
+$sonDiferentes = $cadena1 -ne $cadena2 # Verifica si las cadenas son diferentes
+Write-Host "¿Las cadenas son iguales? $sonIguales"  
+Write-Host "¿Las cadenas son diferentes? $sonDiferentes"
+
+# 10. Operadores de comparación de objetos
+$miObjeto1 = [PSCustomObject]@{ Nombre = "Juan"; Edad = 30 }
+$miObjeto2 = [PSCustomObject]@{ Nombre = "Juan"; Edad = 30 }
+$sonObjetosIguales = $miObjeto1 -eq $miObjeto2 # Verifica si los objetos son iguales
+$sonObjetosDiferentes = $miObjeto1 -ne $miObjeto2 # Verifica si los objetos son diferentes
+Write-Host "¿Los objetos son iguales? $sonObjetosIguales"
+Write-Host "¿Los objetos son diferentes? $sonObjetosDiferentes"
+
+# 11. Operadores de comparación de fechas
+$fecha1 = Get-Date "2024-01-01"
+$fecha2 = Get-Date "2024-12-31"
+$esFecha1Mayor = $fecha1 -gt $fecha2 # Verifica si la fecha1 es mayor que la fecha2
+$esFecha1Menor = $fecha1 -lt $fecha2 # Verifica si la fecha1 es menor que la fecha2
+$esFecha1Igual = $fecha1 -eq $fecha2 # Verifica si la fecha1 es igual a la fecha2
+Write-Host "¿La fecha1 es mayor que la fecha2? $esFecha1Mayor"
+Write-Host "¿La fecha1 es menor que la fecha2? $esFecha1Menor"
+Write-Host "¿La fecha1 es igual a la fecha2? $esFecha1Igual"
+
+# 12. Operadores de comparación de tipos
+$esTipoEntero = $numero -is [int] # Verifica si el número es de tipo entero
+$esTipoDecimal = $numero -is [decimal] # Verifica si el número es de tipo decimal
+$esTipoCadena = $numero -is [string] # Verifica si el número es de tipo cadena
+Write-Host "¿El número es de tipo entero? $esTipoEntero"
+Write-Host "¿El número es de tipo decimal? $esTipoDecimal"
+Write-Host "¿El número es de tipo cadena? $esTipoCadena"
+
+# 13. Operadores de comparación de tipos (con el operador -isnot)
+$esTipoEntero = $numero -isnot [int] # Verifica si el número no es de tipo entero
+$esTipoDecimal = $numero -isnot [decimal] # Verifica si el número no es de tipo decimal
+$esTipoCadena = $numero -isnot [string] # Verifica si el número no es de tipo cadena
+Write-Host "¿El número no es de tipo entero? $esTipoEntero"
+Write-Host "¿El número no es de tipo decimal? $esTipoDecimal"
+Write-Host "¿El número no es de tipo cadena? $esTipoCadena"
+
+# 14. Operadores de comparación de tipos (con el operador -is)
+$esTipoEntero = $numero -is [int] # Verifica si el número es de tipo entero
+$esTipoDecimal = $numero -is [decimal] # Verifica si el número es de tipo decimal
+$esTipoCadena = $numero -is [string] # Verifica si el número es de tipo cadena
+Write-Host "¿El número es de tipo entero? $esTipoEntero"
+Write-Host "¿El número es de tipo decimal? $esTipoDecimal"
+Write-Host "¿El número es de tipo cadena? $esTipoCadena"
+
