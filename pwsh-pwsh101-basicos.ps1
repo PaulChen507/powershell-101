@@ -227,13 +227,27 @@ mymac ~ % $env:PSModulePath -split ':|;'
 
 #region Cmdlets
 <#  Cmdlets
-    Los cmdlets son comandos especiales de PowerShell. 
-    Tienen una estructura verbo-sustantivo.
-    En PowerShell diseñados para realizar tareas particulares. 
-    A diferencia de los comandos tradicionales de la línea de comandos, 
-    los cmdlets están basados en objetos y pueden interactuar con el sistema operativo 
-    y otras aplicaciones de manera más eficiente. 
-    Cada cmdlet sigue una estructura de verbo-nombre, como Get-Help o Set-Item.   
+    Los cmdlets son comandos especializados de PowerShell diseñados para realizar tareas específicas de administración y automatización. 
+    A diferencia de los comandos tradicionales de la línea de comandos, los cmdlets trabajan con objetos en lugar de texto, 
+    lo que permite manipular datos de manera más eficiente y flexible. 
+    Cada cmdlet sigue la convención de nomenclatura verbo-sustantivo (por ejemplo, Get-Process, Set-Item), 
+    lo que facilita su comprensión y descubrimiento.
+
+    Los cmdlets pueden usarse para administrar el sistema operativo, servicios de Microsoft, recursos en la nube y mucho más. 
+    Se pueden combinar en scripts y canalizaciones para automatizar tareas complejas.
+
+    Ejemplo de uso:
+        Get-Help Get-Process      # Muestra ayuda sobre el cmdlet Get-Process
+        Get-Process               # Lista los procesos en ejecución
+        Set-ExecutionPolicy RemoteSigned  # Cambia la política de ejecución de scripts
+
+    Referencias:
+    1. Documentación oficial de Microsoft sobre cmdlets: 
+       https://learn.microsoft.com/powershell/scripting/developer/cmdlet/cmdlet-overview
+    2. Introducción a los cmdlets en PowerShell:
+       https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-cmdlets
+    3. Uso de cmdlets y ejemplos prácticos:
+       https://learn.microsoft.com/powershell/scripting/learn/ps101/01-getting-started
 #>
 
 # Ejemplos de cmdlets que funcionan tanto en Windows como en macOS:
@@ -255,8 +269,19 @@ Test-Connection -ComputerName apple.com
 
 #region Variables
 <#  Variables
-    Las variables en PowerShell se definen con el símbolo $ seguido del nombre de la variable.
-    Puedes almacenar diferentes tipos de datos en variables, como cadenas de texto, números, listas, tablas hash, etc.
+    
+     En PowerShell, una variable es un contenedor que almacena datos que pueden ser utilizados y modificados durante la ejecución de un script.
+     Las variables se definen anteponiendo el símbolo $ al nombre de la variable (por ejemplo, $miVariable).
+     Puedes almacenar en ellas cualquier tipo de dato: cadenas de texto, números, booleanos, arrays, tablas hash, objetos, etc.
+     Las variables son dinámicas, lo que significa que su tipo se determina automáticamente según el valor asignado,  aunque puedes forzar el tipo si lo necesitas.
+    
+     Ejemplo:
+       $nombre = "Ana"
+       $edad = 30
+       $lista = @(1, 2, 3)
+       $tabla = @{ clave = "valor" }
+       [int]$numero = 5 # Forzando el tipo de dato
+
 
 Buenas prácticas para el uso de variables en PowerShell:
 
@@ -265,7 +290,9 @@ Usa nombres de variables que describan claramente su propósito.
 Evita nombres genéricos como $a o $var a menos que sea en bucles muy cortos.
 
 2. Notación camelCase
-En PowerShell, es común usar **camelCase** para variables (ejemplo: $nombreCompleto). 
+En PowerShell, es común usar 
+camelCase
+ para variables (ejemplo: $nombreCompleto). 
 Esto mejora la legibilidad, especialmente en scripts largos.
 
 3. Evita sobrescribir variables automáticas
@@ -282,8 +309,14 @@ $nombre = "Ana"
 Write-Host "Hola, $nombre"      # Muestra: Hola, Ana
 Write-Host 'Hola, $nombre'      # Muestra: Hola, $nombre
 
+Referencias:
+    1. https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-variables
+    2. https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-types
+    3. https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-hashtable
+
 Sugerencia: Comenta tus variables si su propósito no es obvio. 
 Esto ayuda a otros (y a ti mismo en el futuro) a entender el código.
+
 #>
 
 Clear-Host
@@ -305,10 +338,45 @@ Write-Host $mensaje -ForegroundColor Yellow
 #endregion
 
 #region Tipos de Datos
-# En PowerShell, puedes trabajar con diferentes tipos de datos, como cadenas de texto, números, booleanos, 
-# arreglos, tablas hash y objetos personalizados.
-# Estos son algunos de los tipos de datos más comunes que puedes usar en PowerShell.
+<#
+Tipos de Datos en PowerShell
+Los tipos de datos son fundamentales en cualquier lenguaje de programación, y PowerShell no es la excepción.
+En PowerShell, los tipos de datos determinan cómo se almacenan y manipulan los valores en tus scripts. 
+Entenderlos es clave para escribir código robusto y evitar errores.
 
+Tipos de datos comunes en PowerShell
+
+Cadenas de texto (String)
+: Representan texto. Ejemplo: "Hola Mundo"
+ 
+Números (Int, Double)
+: Para cálculos. Ejemplo: 42, 3.14
+ 
+Booleanos (Bool)
+: Solo pueden ser $true o $false. Útiles en condiciones.
+ 
+Arreglos (Array)
+: Colecciones ordenadas de elementos. Ejemplo: @(1, 2, 3)
+ 
+Tablas hash (Hashtable)
+: Pares clave-valor. Ejemplo: @{Nombre="Ana"; Edad=30}
+ 
+Objetos personalizados
+: Permiten estructurar datos complejos. Ejemplo: [PSCustomObject]@{Propiedad="Valor"}
+
+Importancia
+
+- Permiten validar y manipular datos correctamente.
+- Mejoran la legibilidad y mantenibilidad del código.
+- Ayudan a prevenir errores de tipo y lógica.
+
+Referencias
+
+1. [Microsoft Docs: About Data Types](https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-objects?view=powershell-7.3)
+2. [Microsoft Docs: About Arrays](https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-arrays?view=powershell-7.3)
+3. [Microsoft Docs: About Hash Tables](https://learn.microsoft.com/powershell/scripting/learn/deep-dives/everything-about-hashtables?view=powershell-7.3)
+
+#>
 
 # 1. Cadenas de texto (string)
 Write-Host "Cadenas de texto" -ForegroundColor Green
