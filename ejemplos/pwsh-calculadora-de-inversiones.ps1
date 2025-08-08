@@ -1,8 +1,4 @@
-
-
-<#
-
-pwsh-calculadora-de-inversiones.ps1
+<# pwsh-calculadora-de-inversiones.ps1
 
 .SYNOPSIS
     Calcula el valor futuro de una inversión con aporte inicial y aportaciones mensuales,

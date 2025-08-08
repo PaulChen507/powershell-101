@@ -1,13 +1,16 @@
-# Para instalar Powershell en Windows y macOS, todavia no tengo la experencia con Linux
+# Instalacion
 
-Windows 10/11
+Para instalar Powershell en Windows y macOS, todavia no tengo la experencia con Linux
+
+## Windows 10/11
+
 winget install --id Microsoft.Powershell --source winget
 
 Despues pwsh
 
 Para actualizar la version
 
-macOs
+## macOs
 
 Instalar Powershell
 
