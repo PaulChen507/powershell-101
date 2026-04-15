@@ -1,1 +1,51 @@
+# =========================
+# Carpetas generadas
+# =========================
+output/
+logs/
+temp/
+
+# =========================
+# Archivos temporales y logs
+# =========================
+*.log
+~$*
+*.tmp
+*.bak
+
+# =========================
+# Archivos temporales de Excel / Office
+# =========================
+~$*.xlsx
+*.tmp.xlsx
+
+# =========================
+# Archivos sensibles
+# =========================
+secrets.json
+config.local.json
+*-credenciales*
+*-password*
+*.pfx
+*.cer
+
+# =========================
+# VSCode
+# =========================
+.vscode/
+
+# =========================
+# macOS
+# =========================
 .DS_Store
+
+# =========================
+# Binarios
+# =========================
+*.exe
+
+# =========================
+# Ignorar Excel y CSV en general
+# =========================
+*.xlsx
+*.csv
