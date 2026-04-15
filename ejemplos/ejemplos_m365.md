@@ -20,7 +20,7 @@ Para mantener los ejemplos limpios y reutilizables, usaremos valores ficticios c
 
 ---
 
-# Ejemplo 1: Inventario básico de buzones en Exchange Online
+## Ejemplo1:  Inventario básico de buzones en Exchange Online
 
 ## Qué problema resuelve este script
 
@@ -100,34 +100,34 @@ Write-Output "Archivo generado en: $ArchivoCsv"
 
 ---
 
-# Ejemplo 2: Auditoría de licencias asignadas a usuarios en Microsoft 365
+## Ejemplo 2: Auditoría de licencias asignadas a usuarios en Microsoft 365
 
-## Qué problema resuelve este script
+## Qué problema resuelve este script 2
 
 En Microsoft 365 es muy común necesitar una vista simple de qué usuarios tienen licencias asignadas y cuántas licencias tiene cada cuenta.
 
 Este ejemplo sirve para explicar cómo consultar usuarios desde Microsoft Graph y construir un reporte básico de licenciamiento.
 
-## Qué módulo necesita
+## Qué módulo necesita 2
 
 - `Microsoft.Graph.Users`
 
-## Qué variables se deben adaptar
+## Qué variables se deben adaptar 2
 
 - `$RutaSalida`
 - Los permisos del tenant deben permitir lectura de usuarios y licencias.
 
-## Qué salida genera
+## Qué salida genera 2
 
 - Un archivo CSV con usuarios y cantidad de licencias asignadas.
 
-## Qué precauciones tomar antes de ejecutarlo
+## Qué precauciones tomar antes de ejecutarlo 2
 
 - Verifica que tienes permisos adecuados en Microsoft Graph.
 - Asegúrate de conectarte con los scopes correctos.
 - Ten presente que el reporte es administrativo y no reemplaza reportes oficiales de facturación.
 
-## Script
+## Script 2
 
 ```powershell
 #requires -Modules Microsoft.Graph.Users
@@ -183,9 +183,9 @@ Write-Output "Archivo generado en: $ArchivoCsv"
 
 ---
 
-# Ejemplo 3: Inventario de grupos de distribución en Exchange Online
+## Ejemplo 3: Inventario de grupos de distribución en Exchange Online
 
-## Qué problema resuelve este script
+## Qué problema resuelve este script 3
 
 Los grupos de distribución siguen siendo muy utilizados en Microsoft 365 para comunicación interna y externa. Muchas veces se necesita un inventario rápido para revisar:
 
@@ -196,25 +196,25 @@ Los grupos de distribución siguen siendo muy utilizados en Microsoft 365 para c
 
 Este ejemplo permite construir ese inventario de forma sencilla.
 
-## Qué módulo necesita
+## Qué módulo necesita 3
 
 - `ExchangeOnlineManagement`
 
-## Qué variables se deben adaptar
+## Qué variables se deben adaptar 3
 
 - `$RutaSalida`
 - Si necesitas limitar resultados por dominio o prefijo, debes ajustar la consulta.
 
-## Qué salida genera
+## Qué salida genera 3
 
 - Un archivo CSV con información básica de grupos de distribución.
 
-## Qué precauciones tomar antes de ejecutarlo
+## Qué precauciones tomar antes de ejecutarlo 3
 
 - Verifica que tu cuenta tenga permisos para consultar grupos.
 - En algunos entornos puede haber grupos sincronizados desde Active Directory; este ejemplo es solo de inventario.
 
-## Script
+## Script 3
 
 ```powershell
 #requires -Modules ExchangeOnlineManagement
@@ -264,30 +264,3 @@ Disconnect-ExchangeOnline -Confirm:$false
 Write-Output "Grupos exportados: $($Grupos.Count)"
 Write-Output "Archivo generado en: $ArchivoCsv"
 ```
-
----
-
-# Recomendaciones didácticas para el blog
-
-Al publicar estos scripts en el blog, puedes acompañarlos con una explicación sencilla como esta:
-
-1. **Qué problema resuelve el script**
-2. **Qué módulo necesita**
-3. **Qué variables se deben adaptar**
-4. **Qué salida genera**
-5. **Qué precauciones tomar antes de ejecutarlo**
-
-Eso ayuda mucho a que una persona principiante no solo copie el script, sino que también entienda su propósito.
-
----
-
-# Próximo paso sugerido
-
-Con estos ejemplos ya tendrías una primera base equilibrada para el repositorio:
-
-- **3 scripts para Active Directory**
-- **3 scripts para Azure**
-- **3 scripts para Microsoft 365**
-
-El siguiente paso ideal sería organizar estos ejemplos dentro de carpetas por tema y luego enlazarlos desde el `README.md` y desde el artículo principal del blog para que el recorrido de aprendizaje quede mucho más claro.
-
